@@ -34,7 +34,7 @@ def load_data(file_name, n):
         feature_tmp = []
         lines = line.strip().split("\t")
         # print lines[2]
-        if len(lines) <> n - 1:
+        if len(lines) != n - 1:
             continue
         feature_tmp.append(1)
         for x in lines:
@@ -52,7 +52,7 @@ def predict(data, w):
     '''
     h = sig(data * w.T)#sig
     m = np.shape(h)[0]
-    for i in xrange(m):
+    for i in range(m):
         if h[i, 0] < 0.5:
             h[i, 0] = 0.0
         else:
@@ -67,24 +67,24 @@ def save_result(file_name, result):
     m = np.shape(result)[0]
     #输出预测结果到文件
     tmp = []
-    for i in xrange(m):
+    for i in range(m):
         tmp.append(str(result[i, 0]))
     f_result = open(file_name, "w")
-    f_result.write("\t".join(tmp))
+    f_result.write("\n".join(tmp))
     f_result.close()    
 
 if __name__ == "__main__":
     # 1、导入LR模型
-    print "---------- 1.load model ------------"
+    print("---------- 1.load model ------------")
     w = load_weight("weights")
     n = np.shape(w)[1]
     # 2、导入测试数据
-    print "---------- 2.load data ------------"
+    print("---------- 2.load data ------------")
     testData = load_data("test_data", n)
     # 3、对测试数据进行预测
-    print "---------- 3.get prediction ------------"
+    print("---------- 3.get prediction ------------")
     h = predict(testData, w)#进行预测
     # 4、保存最终的预测结果
-    print "---------- 4.save prediction ------------"
+    print("---------- 4.save prediction ------------")
     save_result("result", h)
     

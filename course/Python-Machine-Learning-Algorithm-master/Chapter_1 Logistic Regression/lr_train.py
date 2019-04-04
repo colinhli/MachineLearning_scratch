@@ -19,10 +19,9 @@ def load_data(file_name):
         lable_tmp = []
         lines = line.strip().split("\t")
         feature_tmp.append(1)  # 偏置项
-        for i in xrange(len(lines) - 1):
+        for i in range(len(lines) - 1):
             feature_tmp.append(float(lines[i]))
         lable_tmp.append(float(lines[-1]))
-        
         feature_data.append(feature_tmp)
         label_data.append(lable_tmp)
     f.close()  # 关闭文件
@@ -51,8 +50,8 @@ def lr_train_bgd(feature, label, maxCycle, alpha):
         h = sig(feature * w)  # 计算Sigmoid值
         err = label - h
         if i % 100 == 0:
-            print "\t---------iter=" + str(i) + \
-            " , train error rate= " + str(error_rate(h, label))
+            print("\t---------iter=" + str(i) + \
+            " , train error rate= " + str(error_rate(h, label)))
         w = w + alpha * feature.T * err  # 权重修正
     return w
 
@@ -65,7 +64,7 @@ def error_rate(h, label):
     m = np.shape(h)[0]
     
     sum_err = 0.0
-    for i in xrange(m):
+    for i in range(m):
         if h[i, 0] > 0 and (1 - h[i, 0]) > 0:
             sum_err -= (label[i,0] * np.log(h[i,0]) + \
                         (1-label[i,0]) * np.log(1-h[i,0]))
@@ -81,19 +80,19 @@ def save_model(file_name, w):
     m = np.shape(w)[0]
     f_w = open(file_name, "w")
     w_array = []
-    for i in xrange(m):
+    for i in range(m):
         w_array.append(str(w[i, 0]))
     f_w.write("\t".join(w_array))
     f_w.close()           
 
 if __name__ == "__main__":
     # 1、导入训练数据
-    print "---------- 1.load data ------------"
+    print("---------- 1.load data ------------")
     feature, label = load_data("data.txt")
     # 2、训练LR模型
-    print "---------- 2.training ------------"
+    print("---------- 2.training ------------")
     w = lr_train_bgd(feature, label, 1000, 0.01)
     # 3、保存最终的模型
-    print "---------- 3.save model ------------"
+    print("---------- 3.save model ------------")
     save_model("weights", w)
     

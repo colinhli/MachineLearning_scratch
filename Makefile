@@ -3,7 +3,7 @@ build_dir := build
 .PHONY:all clean
 
 all:$(build_dir) eigen3
-
+	cd $(build_dir);cmake ../;make;make install
 $(build_dir):
 	mkdir $@;
 	mkdir $@/third_party;
