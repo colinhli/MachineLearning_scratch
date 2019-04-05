@@ -18,7 +18,7 @@ class LogisticRegression {
     MatrixXd predict(MatrixXd &x) {
         MatrixXd target = x * this->weights_;
         // target.exp();  //unsupported
-        target = 1 / (1 + (-target).array().exp());
+        target = 1 / (1 + (-target).array().exp()); //sigmod
         return target;
     }
     void update_weights(MatrixXd &diff) {

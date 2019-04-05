@@ -11,6 +11,7 @@
 
 <!-- /TOC -->
 # 1. 编译
+    gcc > 4.9
     make
 
 # 2. 算法实现
@@ -26,3 +27,6 @@
     bin/logistic_regression_test  examples/LogisticRegression/test_data.txt
 ## 2.2. Softmax Regression
 多分类问题
+
+### Factorization Machine 
+矩阵分解方法，用以处理非线性可分问题
